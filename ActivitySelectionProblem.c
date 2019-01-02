@@ -33,7 +33,7 @@ void findMaxActivities(int n,int arrl[n],int depr[n]){
             activitiesIn++;                           
             if (activitiesIn >= maxActivities){
                 if(activitiesIn == maxActivities)k++;   //k is to keep the number of the same activities in 2 or more time periods
-                else k = 0;
+                else k = 0;                        
                 maxActivities = activitiesIn;
                 depr_time[k] = depr[j];           //departure time of max activity
             }

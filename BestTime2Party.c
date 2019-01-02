@@ -1,51 +1,51 @@
 #include <stdio.h>
 
-void findMaxBands(int n,int arr1[n],int depr[n]);
+void findMaxActivities(int n,int arr1[n],int depr[n]);
 void quickSort(int a[],int l,int h);
 int partition(int a[],int l,int h);
 
 int main(){
-    printf("Doste arithmo pareuriskomenon mpanton: ");
+    printf("Give number of activities: ");
     int n;
     scanf("%d",&n);
     int arrl[n],depr[n];
     for(int i = 0; i<n; i++){
-        printf("%d mpanta\n",i+1);
-        printf("Doste ora afixis %d mpantas: ",i+1);
+        printf("%d activity\n",i+1);
+        printf("Start time of %d activity: ",i+1);
         scanf("%d",&arrl[i]);
-        printf("Doste ora anaxorisis %d mpantas: ",i+1);
+        printf("Finish time of %d activity: ",i+1);
         scanf("%d",&depr[i]);
     }
-    findMaxBands(n,arrl,depr);
+    findMaxActivities(n,arrl,depr);
     return 0;
 }
 
-void findMaxBands(int n,int arrl[n],int depr[n]){
-    quickSort(arrl,0,n-1);                          //taksinomo tous pinakes asxetos ama xalao tis periodous me grigori methodo
+void findMaxActivities(int n,int arrl[n],int depr[n]){
+    quickSort(arrl,0,n-1);                          //sort the tables(you can use your own sort method)
     quickSort(depr,0,n-1);
     int depr_time[n];
-    int bandsIn = 1,maxBands = 1;
+    int activitiesIn = 1,maxActivities = 1;
     depr_time[0] = depr[0];
     int i = 1, j = 0,k = 0;
 
-    while (i < n && j < n){                         //elengxo mexri na teleiosoun oi pinakes
+    while (i < n && j < n){                        
         if (arrl[i] < depr[j]){
-            bandsIn++;                              //auksano tis mpantes stin idia periodo
-            if (bandsIn >= maxBands){
-                if(bandsIn == maxBands)k++;        //to k einai gia na kratiso tis perissoteres fores poy emfanizete idios arithmos mpantwn
+            activitiesIn++;                           
+            if (activitiesIn >= maxActivities){
+                if(activitiesIn == maxActivities)k++;   //k is to keep the number of the same activities in 2 or more time periods
                 else k = 0;
-                maxBands = bandsIn;
-                depr_time[k] = depr[j];           //kratao tin anaxorisi tis megistis mpantas
+                maxActivities = activitiesIn;
+                depr_time[k] = depr[j];           //departure time of max activity
             }
             i++;
         }
         else{
-            bandsIn--;                        //bgazo tin teleutea mpanta afou to arrl den ginete na einai megalitero apo to depr se mia periodo
-            j++;                              //auksanontas to j oste to depr na ginei megalitero apo to arrl kai na metraei mpantes apo ekei pou emeine kai oxi apo to 0
+            activitiesIn--;          
+            j++;                     
         }
     }
     for(i=0; i<=k; i++){
-        printf("Maximum Number of Bands : %d at time %d-%d\n",maxBands,depr_time[i]-1,depr_time[i]);
+        printf("Maximum Number of Activities : %d at time period %d-%d\n",maxBands,depr_time[i]-1,depr_time[i]);
     }
 }
 

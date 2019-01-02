@@ -45,7 +45,7 @@ void findMaxActivities(int n,int arrl[n],int depr[n]){
         }
     }
     for(i=0; i<=k; i++){
-        printf("Maximum Number of Activities : %d at time period %d-%d\n",maxBands,depr_time[i]-1,depr_time[i]);
+        printf("Maximum Number of Activities : %d at time period %d-%d\n",maxActivities,depr_time[i]-1,depr_time[i]);
     }
 }
 
